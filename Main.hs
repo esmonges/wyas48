@@ -1,5 +1,6 @@
 module Main where
 import Text.ParserCombinators.Parsec hiding (spaces)
+import Control.Monad
 import System.Environment
 
 data LispVal = Atom String
@@ -52,3 +53,7 @@ parseAtom = do
         "#t" -> Bool True
         "#f" -> Bool False
         _ -> Atom atom
+
+parseNumber :: Parser LispVal
+--TODO: everything after import Control.Monad
+parseNumber = liftM (Number . read) $ many1 digit
